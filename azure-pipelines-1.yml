@@ -20,16 +20,18 @@ stages:
     pool: VMbased
     steps:
     - task: Docker@2
-      displayName: "Building Image"
-      inputs:
-        containerRegistry: 'DockerHub'
-        repository: 'gabrielmccoll'
-        command: 'build'
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-    - task: Docker@2
+      displayName: "logging into dockerhub"
       inputs:
         containerRegistry: 'DockerHub'
         command: 'login'
+    - task: Docker@2
+      displayName: "Building Image"
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'gabrielmccoll/windowsADOagent'
+        command: 'build'
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+
     - task: Docker@2
       displayName: "Pushing Built Image"
       inputs:
@@ -37,6 +39,7 @@ stages:
         repository: 'gabrielmccoll'
         command: 'push'
     - task: Docker@2
+      displayName: 'Logging out of dockerhub'
       inputs:
         containerRegistry: 'DockerHub'
         command: 'logout'
