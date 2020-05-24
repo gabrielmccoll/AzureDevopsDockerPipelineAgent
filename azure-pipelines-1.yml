@@ -20,11 +20,15 @@ stages:
     pool: VMbased
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: "Building Image"
       inputs:
-        command: buildAndPush
-        repository: 'gabrielmccoll'
         containerRegistry: 'DockerHub'
+        repository: 'gabrielmccoll'
+        command: 'build'
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
+    - task: Docker@2
+      displayName: "Pushing Built Image"
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'gabrielmccoll'
+        command: 'push'
