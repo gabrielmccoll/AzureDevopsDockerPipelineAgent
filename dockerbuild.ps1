@@ -1,0 +1,1 @@
+docker build -t dockeragent:latest -m 2GB  .
