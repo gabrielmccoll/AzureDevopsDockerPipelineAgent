@@ -1,1 +1,1 @@
-docker build -t dockeragent:latest -m 2GB  .
+docker build -t dockeragent:latest -m 2GB  . #building the docker image locally
