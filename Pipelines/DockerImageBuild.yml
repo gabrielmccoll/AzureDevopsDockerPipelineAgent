@@ -8,8 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  tag: '$(Build.BuildId)'
 
 stages:
 - stage: BuildandPush
@@ -41,6 +39,9 @@ stages:
         containerRegistry: 'DockerHub'
         repository: 'gabrielmccoll/windowsADOagent'
         command: 'push'
+        tags: |
+          $(Build.BuildId)
+          latest
     - task: Docker@2
       displayName: 'Logging out of dockerhub'
       inputs:
