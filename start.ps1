@@ -43,9 +43,8 @@ Expand-Archive -Path "agent.zip" -DestinationPath "\azp\agent"
 try
 {
   Write-Host "3. Configuring Azure Pipelines agent..." -ForegroundColor Cyan
-
   .\config.cmd --unattended `
-    --agent "$(if (Test-Path Env:AZP_AGENT_NAME) { ${Env:AZP_AGENT_NAME} } else { ${Env:computername} })" `
+    --agent "$(if (Test-Path Env:AZP_AGENT_NAME) { ${Env:AZP_AGENT_NAME} + (Get-Random -Maximum 999999) } else { ${Env:computername} + (Get-Random -Maximum 999999)})" `
     --url "$(${Env:AZP_URL})" `
     --auth PAT `
     --token "$Env:AZP_TOKEN" `
