@@ -6,7 +6,7 @@
 trigger:
 - none
 
-pool: 'Default'
+pool: 'gmtest'
 
 steps:
 - script: echo Hello, world!
